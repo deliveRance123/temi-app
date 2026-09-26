@@ -16,16 +16,37 @@ export default function Home() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [refreshNotesTrigger, setRefreshNotesTrigger] = useState(0);
 
+  // Load user session and refresh real-world counts
   useEffect(() => {
     try {
       const saved = localStorage.getItem("temitope_user");
       if (saved) {
-        setUser(JSON.parse(saved));
+        const parsed = JSON.parse(saved);
+        setUser(parsed);
+        // Refresh live counts from DB
+        fetchRealCounts(parsed.username || "TEMITOPE");
       }
     } catch (e) {
       console.error(e);
     }
   }, []);
+
+  const fetchRealCounts = async (username: string) => {
+    try {
+      const res = await fetch("/api/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username }),
+      });
+      const data = await res.json();
+      if (data.success && data.user) {
+        setUser(data.user);
+        localStorage.setItem("temitope_user", JSON.stringify(data.user));
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   const handleLogin = (loggedUser: User) => {
     setUser(loggedUser);
@@ -71,10 +92,30 @@ export default function Home() {
       if (data.success) {
         showToast("Saved to Notebook 📓");
         setRefreshNotesTrigger((prev) => prev + 1);
+        // Update real counts in header immediately
+        setUser((prev) => {
+          if (!prev) return prev;
+          const updated = {
+            ...prev,
+            notes_count: (prev.notes_count || 0) + 1,
+            words_learned: category === "word" ? (prev.words_learned || 0) + 1 : prev.words_learned,
+          };
+          localStorage.setItem("temitope_user", JSON.stringify(updated));
+          return updated;
+        });
       }
     } catch (e) {
       console.error(e);
     }
+  };
+
+  const handleNotesCountChange = (count: number) => {
+    setUser((prev) => {
+      if (!prev) return prev;
+      const updated = { ...prev, notes_count: count };
+      localStorage.setItem("temitope_user", JSON.stringify(updated));
+      return updated;
+    });
   };
 
   if (!user) {
@@ -82,8 +123,8 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f8fafc] text-slate-900 antialiased">
-      {/* Top Header */}
+    <div className="min-h-screen flex flex-col bg-[#f0fdfa] text-slate-900 antialiased">
+      {/* Top Header with Real Counts */}
       <TopHeader user={user} />
 
       {/* Main Tab Screen */}
@@ -109,6 +150,7 @@ export default function Home() {
             <NotesView
               userId={user.id}
               initialRefreshTrigger={refreshNotesTrigger}
+              onNotesCountChange={handleNotesCountChange}
             />
           </div>
         )}
@@ -116,7 +158,7 @@ export default function Home() {
 
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 px-4 py-2 rounded-xl bg-[#161938] text-white font-medium text-xs shadow-lg flex items-center gap-2">
+        <div className="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 px-4 py-2 rounded-xl bg-[#042f2e] text-teal-100 font-medium text-xs shadow-lg flex items-center gap-2 border border-teal-800">
           <CheckCircle2 className="w-4 h-4 text-emerald-400" />
           <span>{toastMessage}</span>
         </div>

@@ -15,6 +15,7 @@ export interface User {
   avatar_url: string;
   streak_days: number;
   words_learned: number;
+  notes_count?: number;
   created_at: string;
 }
 
@@ -23,6 +24,7 @@ export interface ChatMessage {
   user_id: number;
   role: "user" | "teacher";
   content: string;
+  image_url?: string;
   created_at: string;
 }
 

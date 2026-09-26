@@ -19,7 +19,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   const tabs = [
     {
       id: "teacher" as TabType,
-      label: "Chats",
+      label: "Classroom",
       icon: MessageSquare,
     },
     {
@@ -35,7 +35,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#161938] text-white border-t border-slate-800">
+    <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#042f2e] text-white border-t border-teal-900 shadow-lg">
       <div className="max-w-md mx-auto grid grid-cols-4 h-16 px-2">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
@@ -48,8 +48,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               onClick={() => onChangeTab(tab.id)}
               className={`flex flex-col items-center justify-center gap-1 transition-all cursor-pointer ${
                 isActive
-                  ? "text-[#ff5b60] font-semibold"
-                  : "text-slate-400 hover:text-white"
+                  ? "text-teal-300 font-semibold"
+                  : "text-teal-100/60 hover:text-white"
               }`}
             >
               <div
@@ -64,11 +64,11 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           );
         })}
 
-        {/* Logout Button placed cleanly on the bottom right */}
+        {/* Logout Button cleanly on the bottom right */}
         <button
           type="button"
           onClick={onLogout}
-          className="flex flex-col items-center justify-center gap-1 text-slate-400 hover:text-[#ff5b60] transition-colors cursor-pointer"
+          className="flex flex-col items-center justify-center gap-1 text-teal-100/60 hover:text-rose-400 transition-colors cursor-pointer"
           title="Sign out"
         >
           <div className="p-1 rounded-lg">

@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --app-bg: #f8fafc;
-  --navy: #161938;
-  --coral: #ff5b60;
-  --coral-hover: #fa484e;
-  --bubble-gray: #f1f5f9;
+  --emerald-blue-dark: #042f2e;
+  --emerald-blue-primary: #0f766e;
+  --emerald-blue-vibrant: #0d9488;
+  --emerald-blue-light: #ccfbf1;
+  --app-bg: #f0fdfa;
 }
 
 body {
@@ -20,42 +20,37 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Modern App Shell */
-.app-container {
-  background: #f8fafc;
-  min-height: 100vh;
-  color: #0f172a;
+/* Emerald Blue Theme Components */
+.bg-emerald-navy {
+  background-color: #042f2e;
 }
 
-/* Deep Navy Header / Bottom Bar */
-.bg-navy {
-  background-color: #161938;
+.bg-emerald-blue {
+  background: linear-gradient(135deg, #0f766e 0%, #0e7490 100%);
 }
 
-/* Coral Accent Button */
-.btn-coral {
-  background-color: #ff5b60;
+.btn-emerald-blue {
+  background: linear-gradient(135deg, #0d9488 0%, #0891b2 100%);
   color: #ffffff;
   transition: all 0.15s ease-in-out;
 }
-.btn-coral:hover {
-  background-color: #fa484e;
+.btn-emerald-blue:hover {
+  background: linear-gradient(135deg, #0f766e 0%, #0e7490 100%);
 }
-.btn-coral:active {
-  transform: scale(0.97);
+.btn-emerald-blue:active {
+  transform: scale(0.98);
 }
 
-/* Clean Cards */
 .clean-card-white {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e0f2fe;
   border-radius: 1.25rem;
 }
 
-/* Karaoke highlight */
+/* Karaoke highlight for word-by-word reading */
 .karaoke-active {
-  background: #fef08a;
-  color: #854d0e !important;
+  background: #99f6e4;
+  color: #115e59 !important;
   font-weight: 700;
   border-radius: 0.35rem;
   padding: 0.1rem 0.35rem;
@@ -70,6 +65,6 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #99f6e4;
   border-radius: 4px;
 }
