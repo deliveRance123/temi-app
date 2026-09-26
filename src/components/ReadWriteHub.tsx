@@ -200,8 +200,8 @@ export const ReadWriteHub: React.FC<ReadWriteHubProps> = ({
           onClick={() => setMode("book_club")}
           className={`py-2 px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
             mode === "book_club"
-              ? "btn-emerald-blue font-bold shadow-sm"
-              : "bg-white text-teal-900 hover:bg-teal-50 border border-teal-100"
+              ? "bg-indigo-600 text-white font-bold shadow-md border border-white/20"
+              : "indigo-card text-indigo-200 hover:text-white"
           }`}
         >
           <BookOpen className="w-4 h-4" />
@@ -213,8 +213,8 @@ export const ReadWriteHub: React.FC<ReadWriteHubProps> = ({
           onClick={() => setMode("listen_type")}
           className={`py-2 px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
             mode === "listen_type"
-              ? "bg-[#0e7490] text-white font-bold shadow-sm"
-              : "bg-white text-teal-900 hover:bg-teal-50 border border-teal-100"
+              ? "bg-cyan-500 text-slate-950 font-bold shadow-md"
+              : "indigo-card text-indigo-200 hover:text-white"
           }`}
         >
           <Volume2 className="w-4 h-4" />
@@ -226,8 +226,8 @@ export const ReadWriteHub: React.FC<ReadWriteHubProps> = ({
           onClick={() => setMode("shadow_reading")}
           className={`py-2 px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
             mode === "shadow_reading"
-              ? "bg-[#042f2e] text-teal-200 font-bold shadow-sm"
-              : "bg-white text-teal-900 hover:bg-teal-50 border border-teal-100"
+              ? "bg-purple-600 text-white font-bold shadow-md border border-white/20"
+              : "indigo-card text-indigo-200 hover:text-white"
           }`}
         >
           <Mic className="w-4 h-4" />
@@ -239,8 +239,8 @@ export const ReadWriteHub: React.FC<ReadWriteHubProps> = ({
           onClick={() => setMode("daily_writing")}
           className={`py-2 px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
             mode === "daily_writing"
-              ? "bg-[#0d9488] text-white font-bold shadow-sm"
-              : "bg-white text-teal-900 hover:bg-teal-50 border border-teal-100"
+              ? "bg-blue-600 text-white font-bold shadow-md border border-white/20"
+              : "indigo-card text-indigo-200 hover:text-white"
           }`}
         >
           <PenTool className="w-4 h-4" />
@@ -251,10 +251,10 @@ export const ReadWriteHub: React.FC<ReadWriteHubProps> = ({
       {/* MODE 1: Book Club Read-Along */}
       {mode === "book_club" && (
         <div className="space-y-4">
-          <div className="clean-card-white p-5 text-slate-900 shadow-sm">
-            <div className="flex items-center justify-between pb-3 mb-3 border-b border-teal-50">
+          <div className="indigo-card-bright p-5 text-slate-900 shadow-xl">
+            <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-200">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-2 py-0.5 rounded-full border border-teal-200">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-full border border-indigo-200">
                   Story {currentLessonIndex + 1} of {lessons.length || 4}
                 </span>
                 <h3 className="text-lg font-bold text-slate-900 mt-1">
@@ -268,7 +268,7 @@ export const ReadWriteHub: React.FC<ReadWriteHubProps> = ({
                   onClick={() =>
                     setCurrentLessonIndex((prev) => (prev + 1) % lessons.length)
                   }
-                  className="px-2.5 py-1.5 rounded-lg bg-teal-50 hover:bg-teal-100 text-teal-800 text-xs font-semibold flex items-center gap-1 cursor-pointer"
+                  className="px-2.5 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-800 text-xs font-semibold flex items-center gap-1 cursor-pointer"
                 >
                   <span>Next Story</span>
                   <ChevronRight className="w-3.5 h-3.5" />
@@ -276,7 +276,7 @@ export const ReadWriteHub: React.FC<ReadWriteHubProps> = ({
               )}
             </div>
 
-            {/* Reading Words with Karaoke Highlight */}
+            {/* Reading Words */}
             <div className="text-base md:text-lg leading-relaxed text-slate-800 font-medium">
               {words.map((word, idx) => {
                 const isActive = activeWordIndex === idx;
@@ -287,7 +287,7 @@ export const ReadWriteHub: React.FC<ReadWriteHubProps> = ({
                     className={`cursor-pointer inline-block mr-1 transition-colors ${
                       isActive
                         ? "karaoke-active"
-                        : "hover:text-teal-700 hover:underline"
+                        : "hover:text-indigo-600 hover:underline"
                     }`}
                   >
                     {word}
@@ -296,8 +296,8 @@ export const ReadWriteHub: React.FC<ReadWriteHubProps> = ({
               })}
             </div>
 
-            <p className="text-xs text-teal-800 mt-4 pt-3 border-t border-teal-50 flex items-center gap-1">
-              <Sparkles className="w-3.5 h-3.5 text-teal-600" />
+            <p className="text-xs text-indigo-700 mt-4 pt-3 border-t border-slate-200 flex items-center gap-1 font-medium">
+              <Sparkles className="w-3.5 h-3.5 text-cyan-600" />
               <span>Tap any word to hear pronunciation and syllables</span>
             </p>
           </div>
@@ -305,10 +305,8 @@ export const ReadWriteHub: React.FC<ReadWriteHubProps> = ({
           <button
             type="button"
             onClick={handlePlayStory}
-            className={`w-full py-3.5 px-4 rounded-xl clean-btn text-sm font-semibold flex items-center justify-center gap-2 cursor-pointer shadow-sm ${
-              isPlayingAudio
-                ? "bg-rose-600 text-white animate-pulse"
-                : "btn-emerald-blue"
+            className={`w-full py-3.5 px-4 rounded-xl btn-indigo-primary text-sm font-semibold flex items-center justify-center gap-2 cursor-pointer shadow-lg ${
+              isPlayingAudio ? "bg-rose-600 animate-pulse" : ""
             }`}
           >
             <Volume2 className="w-5 h-5" />
@@ -322,14 +320,14 @@ export const ReadWriteHub: React.FC<ReadWriteHubProps> = ({
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
-                className="p-4 rounded-2xl bg-white border border-teal-200 shadow-md space-y-2"
+                className="p-4 rounded-2xl indigo-card bg-[#1e1b4b]/90 border border-white/20 shadow-xl space-y-2"
               >
                 <div className="flex items-start justify-between">
                   <div>
-                    <h4 className="text-xl font-bold text-teal-900">
+                    <h4 className="text-xl font-bold text-cyan-300">
                       {selectedWord.word}
                     </h4>
-                    <p className="text-xs font-semibold text-teal-600">
+                    <p className="text-xs font-semibold text-indigo-200">
                       Syllables: {selectedWord.syllables}
                     </p>
                   </div>
@@ -338,7 +336,7 @@ export const ReadWriteHub: React.FC<ReadWriteHubProps> = ({
                     <button
                       type="button"
                       onClick={() => speakText(selectedWord.word, undefined, 0.85)}
-                      className="p-2 rounded-lg bg-teal-50 text-teal-700 hover:bg-teal-100"
+                      className="p-2 rounded-lg bg-white/10 text-cyan-300 hover:bg-white/20"
                       title="Listen"
                     >
                       <Volume2 className="w-4 h-4" />
@@ -346,14 +344,14 @@ export const ReadWriteHub: React.FC<ReadWriteHubProps> = ({
                     <button
                       type="button"
                       onClick={() => setSelectedWord(null)}
-                      className="text-slate-400 hover:text-slate-700 text-xs px-2 py-1"
+                      className="text-indigo-300 hover:text-white text-xs px-2 py-1"
                     >
                       ✕
                     </button>
                   </div>
                 </div>
 
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <p className="text-xs text-indigo-100 leading-relaxed">
                   {selectedWord.meaning}
                 </p>
 
@@ -367,7 +365,7 @@ export const ReadWriteHub: React.FC<ReadWriteHubProps> = ({
                     );
                     setSelectedWord(null);
                   }}
-                  className="w-full py-2 rounded-lg btn-emerald-blue text-xs font-semibold flex items-center justify-center gap-1.5 cursor-pointer mt-2"
+                  className="w-full py-2 rounded-lg bg-cyan-500 text-slate-950 font-bold text-xs flex items-center justify-center gap-1.5 cursor-pointer mt-2"
                 >
                   <BookmarkPlus className="w-3.5 h-3.5" />
                   <span>Save "{selectedWord.word}" to Notebook</span>
@@ -381,11 +379,11 @@ export const ReadWriteHub: React.FC<ReadWriteHubProps> = ({
       {/* MODE 2: Listen & Type */}
       {mode === "listen_type" && (
         <div className="space-y-4">
-          <div className="clean-card-white p-5 text-center space-y-3 shadow-sm">
-            <span className="text-[11px] font-bold text-teal-800 uppercase tracking-wider bg-teal-50 px-2.5 py-1 rounded-full border border-teal-200">
+          <div className="indigo-card p-5 text-center space-y-3 shadow-lg">
+            <span className="text-[11px] font-bold text-cyan-300 uppercase tracking-wider bg-white/10 px-2.5 py-1 rounded-full border border-white/10">
               Spelling & Dictation Practice
             </span>
-            <p className="text-xs text-slate-600">
+            <p className="text-xs text-indigo-200">
               Listen to the sentence, then practice typing it.
             </p>
             <button
@@ -393,26 +391,26 @@ export const ReadWriteHub: React.FC<ReadWriteHubProps> = ({
               onClick={() =>
                 speakText("Today is a great day to learn and grow.", undefined, 0.85)
               }
-              className="py-2.5 px-4 rounded-xl btn-emerald-blue text-xs font-semibold inline-flex items-center gap-1.5 shadow-sm"
+              className="py-2.5 px-4 rounded-xl btn-indigo-primary text-xs font-semibold inline-flex items-center gap-1.5 shadow-md"
             >
               <Volume2 className="w-4 h-4" />
               <span>Listen to Sentence</span>
             </button>
           </div>
 
-          <div className="clean-card-white p-4 space-y-3 shadow-sm">
+          <div className="indigo-card p-4 space-y-3 shadow-lg">
             <textarea
               rows={3}
               value={dictationInput}
               onChange={(e) => setDictationInput(e.target.value)}
               placeholder="Type what you heard here..."
-              className="w-full p-3 rounded-xl bg-teal-50/40 border border-teal-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-teal-500"
+              className="w-full p-3 rounded-xl bg-white/10 border border-white/15 text-white placeholder-indigo-300/50 text-sm focus:outline-none focus:border-cyan-400"
             />
 
             <button
               type="button"
               onClick={handleCheckDictation}
-              className="w-full py-3 rounded-xl btn-emerald-blue text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
+              className="w-full py-3 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
             >
               <CheckCircle2 className="w-4 h-4" />
               <span>Check Spelling</span>
@@ -422,8 +420,8 @@ export const ReadWriteHub: React.FC<ReadWriteHubProps> = ({
               <div
                 className={`p-3 rounded-xl text-xs font-medium ${
                   dictationSuccess
-                    ? "bg-emerald-50 border border-emerald-200 text-emerald-800"
-                    : "bg-amber-50 border border-amber-200 text-amber-800"
+                    ? "bg-emerald-500/20 border border-emerald-400/30 text-emerald-200"
+                    : "bg-amber-500/20 border border-amber-400/30 text-amber-200"
                 }`}
               >
                 {dictationFeedback}
@@ -435,28 +433,28 @@ export const ReadWriteHub: React.FC<ReadWriteHubProps> = ({
 
       {/* MODE 3: Shadow Reading */}
       {mode === "shadow_reading" && (
-        <div className="clean-card-white p-5 text-center space-y-4 shadow-sm">
-          <span className="text-[11px] font-bold text-teal-800 uppercase tracking-wider bg-teal-50 px-2.5 py-1 rounded-full border border-teal-200">
+        <div className="indigo-card p-5 text-center space-y-4 shadow-lg">
+          <span className="text-[11px] font-bold text-cyan-300 uppercase tracking-wider bg-white/10 px-2.5 py-1 rounded-full border border-white/10">
             Read Out Loud
           </span>
 
-          <h3 className="text-sm text-slate-600">
+          <h3 className="text-sm text-indigo-200">
             Read this sentence clearly into your microphone:
           </h3>
 
           <div
             className={`p-4 rounded-xl text-lg font-bold border transition-colors ${
               shadowMatched
-                ? "bg-emerald-50 text-emerald-800 border-emerald-300"
-                : "bg-teal-50/50 text-slate-900 border-teal-200"
+                ? "bg-emerald-500/20 text-emerald-200 border-emerald-400/40"
+                : "bg-white/10 text-white border-white/15"
             }`}
           >
             "Today is a great day to learn and grow."
           </div>
 
           {shadowMatched && (
-            <p className="text-xs text-emerald-700 font-semibold flex items-center justify-center gap-1">
-              <Trophy className="w-4 h-4 text-amber-500" />
+            <p className="text-xs text-emerald-300 font-semibold flex items-center justify-center gap-1">
+              <Trophy className="w-4 h-4 text-cyan-400" />
               <span>Great job! Clear pronunciation!</span>
             </p>
           )}
@@ -464,8 +462,8 @@ export const ReadWriteHub: React.FC<ReadWriteHubProps> = ({
           <button
             type="button"
             onClick={handleStartShadow}
-            className={`w-full py-3.5 rounded-xl clean-btn text-sm font-semibold flex items-center justify-center gap-2 cursor-pointer shadow-sm ${
-              shadowListening ? "bg-rose-500 text-white animate-pulse" : "btn-emerald-blue"
+            className={`w-full py-3.5 rounded-xl btn-indigo-primary text-sm font-semibold flex items-center justify-center gap-2 cursor-pointer shadow-md ${
+              shadowListening ? "bg-rose-500 animate-pulse" : ""
             }`}
           >
             <Mic className="w-4 h-4" />
@@ -477,50 +475,50 @@ export const ReadWriteHub: React.FC<ReadWriteHubProps> = ({
       {/* MODE 4: Daily Book Writing */}
       {mode === "daily_writing" && (
         <div className="space-y-4">
-          <div className="clean-card-white p-4 space-y-1.5 shadow-sm">
-            <span className="text-[11px] font-bold text-teal-700 uppercase tracking-wider">
+          <div className="indigo-card p-4 space-y-1.5 shadow-lg">
+            <span className="text-[11px] font-bold text-cyan-300 uppercase tracking-wider">
               Today's Book Prompt
             </span>
-            <h3 className="text-base font-bold text-slate-900 leading-snug">
+            <h3 className="text-base font-bold text-white leading-snug">
               {writingPrompt}
             </h3>
-            <p className="text-xs text-slate-500">
-              Write 1 to 2 sentences. Teacher Grace will format it cleanly!
+            <p className="text-xs text-indigo-200/70">
+              Write 1 to 2 sentences. Teacher will format it cleanly!
             </p>
           </div>
 
-          <div className="clean-card-white p-4 space-y-3 shadow-sm">
+          <div className="indigo-card p-4 space-y-3 shadow-lg">
             <textarea
               rows={4}
               value={userWriting}
               onChange={(e) => setUserWriting(e.target.value)}
               placeholder="Write your thoughts here..."
-              className="w-full p-3 rounded-xl bg-teal-50/40 border border-teal-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-teal-500"
+              className="w-full p-3 rounded-xl bg-white/10 border border-white/15 text-white placeholder-indigo-300/50 text-sm focus:outline-none focus:border-cyan-400"
             />
 
             <button
               type="button"
               onClick={handleReviewWriting}
               disabled={reviewLoading || !userWriting.trim()}
-              className="w-full py-3 rounded-xl btn-emerald-blue text-xs font-semibold flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
+              className="w-full py-3 rounded-xl btn-indigo-primary text-xs font-semibold flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
             >
               {reviewLoading ? (
                 <>
                   <RefreshCw className="w-4 h-4 animate-spin" />
-                  <span>Teacher Grace is formatting...</span>
+                  <span>Teacher is formatting...</span>
                 </>
               ) : (
                 <>
-                  <Sparkles className="w-4 h-4" />
+                  <Sparkles className="w-4 h-4 text-cyan-300" />
                   <span>Polish into a Book Page</span>
                 </>
               )}
             </button>
 
             {writingReview && (
-              <div className="clean-card-white p-4 text-slate-900 rounded-xl space-y-2 border border-teal-200 shadow-sm">
-                <span className="text-xs font-bold text-teal-800">
-                  Teacher Grace's Book Polish:
+              <div className="indigo-card-bright p-4 text-slate-900 rounded-xl space-y-2 shadow-md">
+                <span className="text-xs font-bold text-indigo-700">
+                  Teacher's Book Polish:
                 </span>
                 <p className="text-xs font-medium leading-relaxed whitespace-pre-wrap text-slate-800">
                   {writingReview}
@@ -530,7 +528,7 @@ export const ReadWriteHub: React.FC<ReadWriteHubProps> = ({
                   onClick={() =>
                     onSaveToNotes(userWriting, "My Daily Story", "diary")
                   }
-                  className="mt-2 text-xs font-bold text-teal-700 bg-teal-50 hover:bg-teal-100 px-3 py-1.5 rounded-lg flex items-center gap-1 cursor-pointer"
+                  className="mt-2 text-xs font-bold text-indigo-800 bg-indigo-50 hover:bg-indigo-100 px-3 py-1.5 rounded-lg flex items-center gap-1 cursor-pointer"
                 >
                   <BookmarkPlus className="w-3.5 h-3.5" />
                   <span>Save to Notebook</span>

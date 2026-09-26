@@ -3,16 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --emerald-blue-dark: #042f2e;
-  --emerald-blue-primary: #0f766e;
-  --emerald-blue-vibrant: #0d9488;
-  --emerald-blue-light: #ccfbf1;
-  --app-bg: #f0fdfa;
+  --indigo-dark: #1e1b4b;
+  --indigo-bg: #2e266d;
+  --indigo-card: rgba(255, 255, 255, 0.08);
+  --cyan-accent: #00d2ff;
 }
 
 body {
-  background: var(--app-bg);
-  color: #0f172a;
+  background: linear-gradient(180deg, #372f7d 0%, #251f5c 50%, #1a1642 100%);
+  color: #ffffff;
   min-height: 100vh;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
@@ -20,37 +19,51 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Emerald Blue Theme Components */
-.bg-emerald-navy {
-  background-color: #042f2e;
+/* Royal Indigo Cards (matching reference image) */
+.indigo-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.5rem;
 }
 
-.bg-emerald-blue {
-  background: linear-gradient(135deg, #0f766e 0%, #0e7490 100%);
+.indigo-card-bright {
+  background: #ffffff;
+  color: #1e1b4b;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-.btn-emerald-blue {
-  background: linear-gradient(135deg, #0d9488 0%, #0891b2 100%);
+/* Royal Indigo Primary Button */
+.btn-indigo-primary {
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
   color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.15s ease-in-out;
 }
-.btn-emerald-blue:hover {
-  background: linear-gradient(135deg, #0f766e 0%, #0e7490 100%);
+.btn-indigo-primary:hover {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
 }
-.btn-emerald-blue:active {
+.btn-indigo-primary:active {
   transform: scale(0.98);
 }
 
-.clean-card-white {
-  background: #ffffff;
-  border: 1px solid #e0f2fe;
-  border-radius: 1.25rem;
+/* Cyan Accent Button */
+.btn-cyan {
+  background: linear-gradient(135deg, #00d2ff 0%, #0284c7 100%);
+  color: #ffffff;
+  font-weight: 700;
+  transition: all 0.15s ease-in-out;
+}
+.btn-cyan:active {
+  transform: scale(0.98);
 }
 
 /* Karaoke highlight for word-by-word reading */
 .karaoke-active {
-  background: #99f6e4;
-  color: #115e59 !important;
+  background: #38bdf8;
+  color: #0f172a !important;
   font-weight: 700;
   border-radius: 0.35rem;
   padding: 0.1rem 0.35rem;
@@ -65,6 +78,6 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #99f6e4;
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 4px;
 }

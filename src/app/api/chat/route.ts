@@ -67,13 +67,26 @@ export async function POST(req: Request) {
 
     const displayMsg = trimmedMsg || (imageBase64 ? "Uploaded paper photo for reading help" : "");
 
-    // 1. Save user's message to Neon DB
-    await sql`
+    // 1. Save user's spoken words or message to Neon DB
+    const savedUser = (await sql`
       INSERT INTO chat_messages (user_id, role, content)
-      VALUES (${parseInt(userId)}, 'user', ${displayMsg});
-    `;
+      VALUES (${parseInt(userId)}, 'user', ${displayMsg})
+      RETURNING id, user_id, role, content, created_at;
+    `) as ChatMessage[];
 
-    // 2. Fetch recent conversation context (last 4 for max speed)
+    // 2. CRITICAL RULE: When in "voice_note" mode, the AI DOES NOT reply!
+    // The system simply writes out what the user said.
+    if (mode === "voice_note") {
+      return NextResponse.json({
+        success: true,
+        userMessage: savedUser[0],
+        reply: null,
+        message: null,
+        noteOnly: true,
+      });
+    }
+
+    // 3. When in "ask" mode, Teacher replies back!
     const recentHistory = (await sql`
       SELECT role, content
       FROM chat_messages
@@ -84,28 +97,18 @@ export async function POST(req: Request) {
 
     recentHistory.reverse();
 
-    // 3. System instruction: strictly NO special characters, friendly natural English
-    let systemInstruction = `You are Teacher Grace, Temitope's loving, patient personal English teacher.
+    const systemInstruction = `You are Teacher, Temitope's loving, patient personal English teacher.
 CRITICAL FORMATTING RULES:
 1. Do NOT use any special characters like asterisks (*), hashtags (#), bullet dashes (-), or bold marks. Write in clean, normal English sentences.
 2. Keep your replies concise, warm, and natural (1 to 3 sentences).
-3. If an image or photo of paper is provided, read what is written on the paper clearly and explain it gently.`;
+3. If an image or photo of paper is provided, read what is written on the paper clearly and explain it gently.
+4. Answer her questions or greetings directly, warmly, and naturally.`;
 
-    if (mode === "voice_note") {
-      systemInstruction += `\nTemitope spoke a voice note: "${trimmedMsg}".
-Write out the correct English sentence clearly without any asterisks or bullet dashes.
-Mention the key words and their syllables in clean plain words.`;
-    } else {
-      systemInstruction += `\nAnswer her question or greeting directly, warmly, and naturally.`;
-    }
-
-    // 4. Build contents
     const contents: any[] = recentHistory.map((m) => ({
       role: m.role === "teacher" ? "model" : "user",
       parts: [{ text: m.content }],
     }));
 
-    // If an image is included in this turn, attach it to the latest user part
     if (imageBase64) {
       const cleanBase64 = imageBase64.replace(/^data:image\/[a-zA-Z]+;base64,/, "");
       contents.push({
@@ -122,7 +125,6 @@ Mention the key words and their syllables in clean plain words.`;
       });
     }
 
-    // 5. Call Google Gemini API with cascade for speed
     let teacherReply = "";
     for (const model of FAST_MODELS) {
       try {
@@ -159,7 +161,7 @@ Mention the key words and their syllables in clean plain words.`;
       teacherReply = "I am right here with you, Temitope! How can I help you learn today?";
     }
 
-    // 6. Save teacher's response to Neon DB
+    // 4. Save Teacher's response to Neon DB
     const savedTeacherMsg = (await sql`
       INSERT INTO chat_messages (user_id, role, content)
       VALUES (${parseInt(userId)}, 'teacher', ${teacherReply})
@@ -168,6 +170,7 @@ Mention the key words and their syllables in clean plain words.`;
 
     return NextResponse.json({
       success: true,
+      userMessage: savedUser[0],
       reply: teacherReply,
       message: savedTeacherMsg[0],
     });

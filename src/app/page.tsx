@@ -23,7 +23,6 @@ export default function Home() {
       if (saved) {
         const parsed = JSON.parse(saved);
         setUser(parsed);
-        // Refresh live counts from DB
         fetchRealCounts(parsed.username || "TEMITOPE");
       }
     } catch (e) {
@@ -92,7 +91,6 @@ export default function Home() {
       if (data.success) {
         showToast("Saved to Notebook 📓");
         setRefreshNotesTrigger((prev) => prev + 1);
-        // Update real counts in header immediately
         setUser((prev) => {
           if (!prev) return prev;
           const updated = {
@@ -123,8 +121,8 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f0fdfa] text-slate-900 antialiased">
-      {/* Top Header with Real Counts */}
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#372f7d] via-[#251f5c] to-[#1a1642] text-white antialiased">
+      {/* Top Header */}
       <TopHeader user={user} />
 
       {/* Main Tab Screen */}
@@ -158,8 +156,8 @@ export default function Home() {
 
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 px-4 py-2 rounded-xl bg-[#042f2e] text-teal-100 font-medium text-xs shadow-lg flex items-center gap-2 border border-teal-800">
-          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+        <div className="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 px-4 py-2 rounded-xl bg-[#1e1b4b] text-cyan-300 font-medium text-xs shadow-2xl flex items-center gap-2 border border-cyan-400/30">
+          <CheckCircle2 className="w-4 h-4 text-cyan-400" />
           <span>{toastMessage}</span>
         </div>
       )}

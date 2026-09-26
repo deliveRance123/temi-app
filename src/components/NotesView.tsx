@@ -131,11 +131,11 @@ export const NotesView: React.FC<NotesViewProps> = ({
       {/* Header Bar */}
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-            <Notebook className="w-5 h-5 text-teal-700" />
+          <h2 className="text-lg font-bold text-white flex items-center gap-2">
+            <Notebook className="w-5 h-5 text-cyan-400" />
             <span>Temitope's Notebook</span>
           </h2>
-          <p className="text-xs text-teal-800 font-medium">
+          <p className="text-xs text-indigo-200">
             {notes.length} real {notes.length === 1 ? "entry" : "entries"} saved
           </p>
         </div>
@@ -143,7 +143,7 @@ export const NotesView: React.FC<NotesViewProps> = ({
         <button
           type="button"
           onClick={() => setShowAddModal(true)}
-          className="py-2 px-3 rounded-xl btn-emerald-blue text-xs font-semibold flex items-center gap-1.5 cursor-pointer shadow-sm"
+          className="py-2 px-3 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs flex items-center gap-1.5 cursor-pointer shadow-md"
         >
           <Plus className="w-4 h-4" />
           <span>New Note</span>
@@ -164,8 +164,8 @@ export const NotesView: React.FC<NotesViewProps> = ({
             onClick={() => setCategoryFilter(tab.id)}
             className={`py-1.5 px-3 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
               categoryFilter === tab.id
-                ? "bg-[#0f766e] text-white shadow-xs"
-                : "bg-white text-teal-900 hover:bg-teal-50 border border-teal-100"
+                ? "bg-indigo-600 text-white shadow-xs"
+                : "indigo-card text-indigo-200 hover:text-white"
             }`}
           >
             {tab.label}
@@ -175,14 +175,14 @@ export const NotesView: React.FC<NotesViewProps> = ({
 
       {/* Notes List */}
       {loading ? (
-        <div className="p-8 text-center text-xs text-teal-800">
+        <div className="p-8 text-center text-xs text-indigo-200">
           Loading your notes...
         </div>
       ) : notes.length === 0 ? (
-        <div className="clean-card-white p-6 text-center space-y-2 shadow-sm">
-          <BookMarked className="w-8 h-8 text-teal-600 mx-auto" />
-          <h3 className="text-sm font-bold text-slate-900">Notebook is empty</h3>
-          <p className="text-xs text-slate-500 max-w-xs mx-auto">
+        <div className="indigo-card p-6 text-center space-y-2 shadow-lg">
+          <BookMarked className="w-8 h-8 text-indigo-300 mx-auto" />
+          <h3 className="text-sm font-bold text-white">Notebook is empty</h3>
+          <p className="text-xs text-indigo-200/70 max-w-xs mx-auto">
             Save words from stories or chat to review and practice anytime.
           </p>
         </div>
@@ -191,22 +191,22 @@ export const NotesView: React.FC<NotesViewProps> = ({
           {notes.map((note) => (
             <div
               key={note.id}
-              className="clean-card-white p-3.5 space-y-2 shadow-sm"
+              className="indigo-card p-3.5 space-y-2 border border-white/10 shadow-md"
             >
               <div className="flex items-start justify-between">
                 <div>
                   <span
                     className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full ${
                       note.category === "word"
-                        ? "bg-teal-50 text-teal-800 border border-teal-200"
+                        ? "bg-cyan-500/20 text-cyan-300 border border-cyan-400/30"
                         : note.category === "sentence"
-                        ? "bg-cyan-50 text-cyan-800 border border-cyan-200"
-                        : "bg-emerald-50 text-emerald-800 border border-emerald-200"
+                        ? "bg-amber-500/20 text-amber-300 border border-amber-400/30"
+                        : "bg-purple-500/20 text-purple-300 border border-purple-400/30"
                     }`}
                   >
                     {note.category}
                   </span>
-                  <h4 className="text-base font-bold text-slate-900 mt-1">
+                  <h4 className="text-base font-bold text-white mt-1">
                     {note.title}
                   </h4>
                 </div>
@@ -215,7 +215,7 @@ export const NotesView: React.FC<NotesViewProps> = ({
                   <button
                     type="button"
                     onClick={() => handlePlay(note.content, note.id)}
-                    className="p-1.5 rounded-lg text-teal-700 hover:bg-teal-50"
+                    className="p-1.5 rounded-lg text-cyan-300 hover:bg-white/10"
                     title="Listen"
                   >
                     <Volume2 className="w-4 h-4" />
@@ -224,11 +224,11 @@ export const NotesView: React.FC<NotesViewProps> = ({
                   <button
                     type="button"
                     onClick={() => handleCopy(note.content, note.id)}
-                    className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-teal-50"
+                    className="p-1.5 rounded-lg text-indigo-200 hover:text-white hover:bg-white/10"
                     title="Copy"
                   >
                     {copiedId === note.id ? (
-                      <Check className="w-4 h-4 text-emerald-600" />
+                      <Check className="w-4 h-4 text-cyan-400" />
                     ) : (
                       <Copy className="w-4 h-4" />
                     )}
@@ -237,7 +237,7 @@ export const NotesView: React.FC<NotesViewProps> = ({
                   <button
                     type="button"
                     onClick={() => handleDeleteNote(note.id)}
-                    className="p-1.5 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-rose-50"
+                    className="p-1.5 rounded-lg text-indigo-300 hover:text-rose-400 hover:bg-rose-500/20"
                     title="Delete"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -245,19 +245,19 @@ export const NotesView: React.FC<NotesViewProps> = ({
                 </div>
               </div>
 
-              <div className="text-xs font-medium text-slate-800 leading-relaxed">
+              <div className="text-xs font-medium text-indigo-100 leading-relaxed">
                 {note.content}
               </div>
 
               {(note.pronunciation || note.meaning) && (
-                <div className="pt-2 border-t border-teal-50 text-[11px] text-teal-800 flex flex-col gap-0.5">
+                <div className="pt-2 border-t border-white/10 text-[11px] text-cyan-300 flex flex-col gap-0.5">
                   {note.pronunciation && (
                     <p className="font-semibold">
                       Syllables: {note.pronunciation}
                     </p>
                   )}
                   {note.meaning && (
-                    <p className="text-slate-600">{note.meaning}</p>
+                    <p className="text-indigo-200/80">{note.meaning}</p>
                   )}
                 </div>
               )}
@@ -269,15 +269,15 @@ export const NotesView: React.FC<NotesViewProps> = ({
       {/* Add Note Modal */}
       <AnimatePresence>
         {showAddModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-white p-5 rounded-2xl w-full max-w-sm space-y-4 shadow-xl border border-teal-100"
+              className="indigo-card bg-[#251f5c] p-5 rounded-2xl w-full max-w-sm space-y-4 shadow-2xl border border-white/20"
             >
-              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-teal-600" />
+              <h3 className="text-base font-bold text-white flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-cyan-400" />
                 <span>Write in Notebook</span>
               </h3>
 
@@ -290,8 +290,8 @@ export const NotesView: React.FC<NotesViewProps> = ({
                       onClick={() => setNewCategory(cat)}
                       className={`py-1.5 rounded-lg text-xs font-semibold capitalize transition-all ${
                         newCategory === cat
-                          ? "btn-emerald-blue font-bold shadow-xs"
-                          : "bg-teal-50 text-teal-800"
+                          ? "bg-cyan-500 text-slate-950 font-bold shadow-xs"
+                          : "bg-white/10 text-indigo-200"
                       }`}
                     >
                       {cat}
@@ -300,7 +300,7 @@ export const NotesView: React.FC<NotesViewProps> = ({
                 </div>
 
                 <div>
-                  <label className="text-xs text-slate-700 font-semibold mb-1 block">
+                  <label className="text-xs text-indigo-200 font-semibold mb-1 block">
                     Title or Word:
                   </label>
                   <input
@@ -308,12 +308,12 @@ export const NotesView: React.FC<NotesViewProps> = ({
                     value={newTitle}
                     onChange={(e) => setNewTitle(e.target.value)}
                     placeholder="e.g. Beautiful, Today's Lesson"
-                    className="w-full p-2.5 rounded-xl bg-teal-50/40 border border-teal-200 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:border-teal-500"
+                    className="w-full p-2.5 rounded-xl bg-white/10 border border-white/15 text-white placeholder-indigo-300/50 text-xs focus:outline-none focus:border-cyan-400"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs text-slate-700 font-semibold mb-1 block">
+                  <label className="text-xs text-indigo-200 font-semibold mb-1 block">
                     Content / Notes:
                   </label>
                   <textarea
@@ -321,7 +321,7 @@ export const NotesView: React.FC<NotesViewProps> = ({
                     value={newContent}
                     onChange={(e) => setNewContent(e.target.value)}
                     placeholder="Write sentence or definition here..."
-                    className="w-full p-2.5 rounded-xl bg-teal-50/40 border border-teal-200 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:border-teal-500"
+                    className="w-full p-2.5 rounded-xl bg-white/10 border border-white/15 text-white placeholder-indigo-300/50 text-xs focus:outline-none focus:border-cyan-400"
                   />
                 </div>
 
@@ -329,13 +329,13 @@ export const NotesView: React.FC<NotesViewProps> = ({
                   <button
                     type="button"
                     onClick={() => setShowAddModal(false)}
-                    className="flex-1 py-2.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold"
+                    className="flex-1 py-2.5 rounded-xl bg-white/10 text-indigo-200 text-xs font-semibold hover:bg-white/15"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 py-2.5 rounded-xl btn-emerald-blue text-xs font-semibold shadow-sm"
+                    className="flex-1 py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs shadow-md"
                   >
                     Save Note
                   </button>
