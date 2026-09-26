@@ -1,0 +1,18 @@
+{
+  "name": "Temitope - Personal English Teacher & Reader",
+  "short_name": "Temitope",
+  "description": "Personal AI English Teacher and Book Reader built for Temitope",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#2563EB",
+  "theme_color": "#2563EB",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/assets/temitope-brand.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

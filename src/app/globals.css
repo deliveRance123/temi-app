@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --app-bg: #f8fafc;
+  --navy: #161938;
+  --coral: #ff5b60;
+  --coral-hover: #fa484e;
+  --bubble-gray: #f1f5f9;
+}
+
+body {
+  background: var(--app-bg);
+  color: #0f172a;
+  min-height: 100vh;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Modern App Shell */
+.app-container {
+  background: #f8fafc;
+  min-height: 100vh;
+  color: #0f172a;
+}
+
+/* Deep Navy Header / Bottom Bar */
+.bg-navy {
+  background-color: #161938;
+}
+
+/* Coral Accent Button */
+.btn-coral {
+  background-color: #ff5b60;
+  color: #ffffff;
+  transition: all 0.15s ease-in-out;
+}
+.btn-coral:hover {
+  background-color: #fa484e;
+}
+.btn-coral:active {
+  transform: scale(0.97);
+}
+
+/* Clean Cards */
+.clean-card-white {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1.25rem;
+}
+
+/* Karaoke highlight */
+.karaoke-active {
+  background: #fef08a;
+  color: #854d0e !important;
+  font-weight: 700;
+  border-radius: 0.35rem;
+  padding: 0.1rem 0.35rem;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
